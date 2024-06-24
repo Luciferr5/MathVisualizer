@@ -1,0 +1,820 @@
+-- All necessaary imports 
+-- All imports were worked on by everyone in the group to ensure equal contribution
+
+import Zhaok31.MathVisTitlePage -- title page
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=3ca5552c-8c32-40fc-b71c-a8a7e0525498
+
+import Zhaok31.MathVisEmailsPage -- Contacts page
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=df89e701-16a9-4325-bb63-279f3c9ebb7a
+
+import Zhaok31.MathVisDefinition -- Definition page
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=839912fb-3c4f-489b-865b-a3e7795ed2dd
+
+import Zhaok31.MathVisVideo -- Video page
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=48c2cfea-4559-4081-b05c-7109a80931ca
+
+import Zhaok31.MathVisQ1 -- question1
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=8b4bc095-ff15-4f51-b157-1cb3bb48d780
+
+import Zhaok31.MathVisQ2 -- question2
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=ce3d758c-1ded-4d06-b4da-cbc98aedf584
+
+import Zhaok31.MathVisQ3 -- question3
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=af2e15fe-b153-414b-9871-259ff2e8c245
+
+import Zhaok31.MathVisQ4 -- question4
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=5de9a27b-8973-4275-b244-894dc1c09743
+
+import Zhaok31.MathVisQ5 -- question5
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=25ae24a3-058e-46ba-9974-6c706083cbaf
+
+import Zhaok31.MathVisQ6 -- question6
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=dbaf3563-677e-4170-8b91-a4ca2fc2f4c6
+
+import Zhaok31.MathVisQ7 -- question7
+--- https://cs1xd3.online/ShowModulePublish?modulePublishId=4cf27e38-f61d-4038-9580-82464e60a223
+
+import Zhaok31.MathVisQ8 -- question8
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=08439519-6447-4aa2-98d6-e4417ac17c71
+
+import Zhaok31.MathVisQ9 -- question9
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=9adb7877-c5ae-45ec-a26c-1d96a3ef1a0e
+
+import Zhaok31.MathVisQ10 -- question10
+-- https://cs1xd3.online/ShowModulePublish?modulePublishId=f819a3ae-dca6-40de-ba8b-d127860d86c7
+
+-- shapes for all imports
+myShapes: Model -> List(Shape Msg)
+myShapes model =
+      case model.state of
+      
+    -- title screen state
+    TitleScreen -> [
+         Zhaok31.MathVisTitlePage.myShapes model.agtitleModel
+          |> group
+          |> GraphicSVG.map AGTITLEMsg,
+          
+          -- Button Styling
+          group [
+               rect 40 15 
+                 |> filled (rgb 255 174 66)
+                 |> move (60,55)
+                 |> notifyTap EmailButton,
+               text "Contacts"
+                 |> centered
+                 |> size 8
+                 |> filled black
+                 |> move(60, 52)
+                 |> notifyTap EmailButton,
+                 
+                 
+               rect 40 15 
+                 |> filled (rgb 255 174 66)
+                 |> move (5,55)
+                 |> notifyTap DefinitionButton,
+               text "Definitions"
+                 |> centered
+                 |> size 8
+                 |> filled black
+                 |> move(5, 52)
+                 |> notifyTap DefinitionButton,
+                 
+                 
+               roundedRect 40 20 3
+                 |> filled grey
+                 |> move (-40,-45)
+                 |> notifyTap VideoButton,
+               text "Videos"
+                 |> centered
+                 |> size 8
+                 |> filled black
+                 |> move(-40, -48)
+                 |> notifyTap VideoButton,
+                 
+              roundedRect 40 20 3
+                 |> filled grey
+                 |> move (40,-45)
+                 |> notifyTap PracticeButton,
+               text "Practice"
+                 |> centered
+                 |> size 8
+                 |> filled black
+                 |> move(40, -48)
+                 |> notifyTap PracticeButton
+                 
+                 ]
+         ]
+         
+    -- contact screen state
+    Email -> [
+         Zhaok31.MathVisEmailsPage.myShapes model.agemailModel
+          |> group
+          |> GraphicSVG.map AGEMAILMsg,
+          
+          -- Button Styling
+          group [
+               rect 40 15 
+                 |> filled red
+                 |> move (-80,-57)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-80, -59)
+                 |> notifyTap BackButton
+                 ]
+         ]
+         
+         
+    -- definitions screen state
+    Definition -> [
+         Zhaok31.MathVisDefinition.myShapes model.agdefinitionModel
+          |> group
+          |> GraphicSVG.map AGDEFINITIONMsg,
+          
+          -- Button Styling
+          group [
+               rect 10 7
+                 |> filled red
+                 |> move (-90,60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 4
+                 |> filled white
+                 |> move(-90, 58)
+                 |> notifyTap BackButton
+                 ]
+         ]
+         
+         
+    -- definitions screen state
+    Video -> [
+         Zhaok31.MathVisVideo.myShapes model.agvideoModel
+          |> group
+          |> GraphicSVG.map AGVIDEOMsg,
+          
+          -- Button Styling
+          group [
+               rect 30 35
+                 |> filled red
+                 |> move (-80,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-80, -55)
+                 |> notifyTap BackButton
+                 ]
+         ]
+         
+         
+    -- questions screen state
+    Q1 -> [
+         Zhaok31.MathVisQ1.myShapes model.agq1Model
+          |> group
+          |> GraphicSVG.map AGQ1Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         
+         -- questions screen state
+    Q2 -> [
+         Zhaok31.MathVisQ2.myShapes model.agq2Model
+          |> group
+          |> GraphicSVG.map AGQ2Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         -- questions screen state
+    Q3 -> [
+         Zhaok31.MathVisQ3.myShapes model.agq3Model
+          |> group
+          |> GraphicSVG.map AGQ3Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         -- questions screen state
+    Q4 -> [
+         Zhaok31.MathVisQ4.myShapes model.agq4Model
+          |> group
+          |> GraphicSVG.map AGQ4Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         -- questions screen state
+    Q5 -> [
+         Zhaok31.MathVisQ5.myShapes model.agq5Model
+          |> group
+          |> GraphicSVG.map AGQ5Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         -- questions screen state
+    Q6 -> [
+         Zhaok31.MathVisQ6.myShapes model.agq6Model
+          |> group
+          |> GraphicSVG.map AGQ6Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         -- questions screen state
+    Q7 -> [
+         Zhaok31.MathVisQ7.myShapes model.agq7Model
+          |> group
+          |> GraphicSVG.map AGQ7Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         -- questions screen state
+    Q8 -> [
+         Zhaok31.MathVisQ8.myShapes model.agq8Model
+          |> group
+          |> GraphicSVG.map AGQ8Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         -- questions screen state
+    Q9 -> [
+         Zhaok31.MathVisQ9.myShapes model.agq9Model
+          |> group
+          |> GraphicSVG.map AGQ9Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         -- questions screen state
+    Q10 -> [
+         Zhaok31.MathVisQ10.myShapes model.agq10Model
+          |> group
+          |> GraphicSVG.map AGQ10Msg,
+          
+          -- Button Styling
+          group [
+               rect 20 25
+                 |> filled red
+                 |> move (-86,-60)
+                 |> notifyTap BackButton,
+               text "Back"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, -58)
+                 |> notifyTap BackButton,
+                 
+               rect 40 35
+                 |> filled green
+                 |> move (77,-60)
+                 |> notifyTap NextButton,
+               text "Skip/Next"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(77, -56)
+                 |> notifyTap NextButton,
+                 
+               rect  20 25
+                 |> filled red
+                 |> move (-86,60)
+                 |> notifyTap PrevButton,
+               text "Prev"
+                 |> centered
+                 |> size 8
+                 |> filled white
+                 |> move(-86, 53)
+                 |> notifyTap PrevButton
+                 ]
+         ]
+         
+         
+
+-- Message type for all states 
+type Msg = Tick Float GetKeyState
+          | EmailButton
+          | BackButton
+          | DefinitionButton
+          | VideoButton
+          | PracticeButton
+          | NextButton
+          | PrevButton
+          | AGTITLEMsg Zhaok31.MathVisTitlePage.Msg
+          | AGEMAILMsg Zhaok31.MathVisEmailsPage.Msg
+          | AGDEFINITIONMsg Zhaok31.MathVisDefinition.Msg
+          | AGVIDEOMsg Zhaok31.MathVisVideo.Msg
+          | AGQ1Msg Zhaok31.MathVisQ1.Msg
+          | AGQ2Msg Zhaok31.MathVisQ2.Msg
+          | AGQ3Msg Zhaok31.MathVisQ3.Msg
+          | AGQ4Msg Zhaok31.MathVisQ4.Msg
+          | AGQ5Msg Zhaok31.MathVisQ5.Msg
+          | AGQ6Msg Zhaok31.MathVisQ6.Msg
+          | AGQ7Msg Zhaok31.MathVisQ7.Msg
+          | AGQ8Msg Zhaok31.MathVisQ8.Msg
+          | AGQ9Msg Zhaok31.MathVisQ9.Msg
+          | AGQ10Msg Zhaok31.MathVisQ10.Msg
+
+-- Type aliases for all states
+type alias Model = {  time : Float
+                    , startTime : Float
+                    , state : State
+                    , agtitleModel : Zhaok31.MathVisTitlePage.Model
+                    , agemailModel : Zhaok31.MathVisEmailsPage.Model
+                    , agdefinitionModel : Zhaok31.MathVisDefinition.Model
+                    , agvideoModel : Zhaok31.MathVisVideo.Model
+                    , agq1Model : Zhaok31.MathVisQ1.Model
+                    , agq2Model : Zhaok31.MathVisQ2.Model
+                    , agq3Model : Zhaok31.MathVisQ3.Model
+                    , agq4Model : Zhaok31.MathVisQ4.Model
+                    , agq5Model : Zhaok31.MathVisQ5.Model
+                    , agq6Model : Zhaok31.MathVisQ6.Model
+                    , agq7Model : Zhaok31.MathVisQ7.Model
+                    , agq8Model : Zhaok31.MathVisQ8.Model
+                    , agq9Model : Zhaok31.MathVisQ9.Model
+                    , agq10Model : Zhaok31.MathVisQ10.Model
+                    }
+
+-- State variables for all modules
+type State = TitleScreen
+            | Email
+            | Definition
+            | Video
+            | Q1
+            | Q2
+            | Q3
+            | Q4
+            | Q5
+            | Q6
+            | Q7
+            | Q8
+            | Q9
+            | Q10
+              
+              
+-- Update to track all updated states            
+update : Msg -> Model -> Model
+update msg model = case msg of
+                     -- tick for time 
+                     Tick t k -> {model | time = t
+                                , agtitleModel = Zhaok31.MathVisTitlePage.update (Zhaok31.MathVisTitlePage.Tick (model.time - model.startTime) k) model.agtitleModel
+                                , agemailModel = Zhaok31.MathVisEmailsPage.update (Zhaok31.MathVisEmailsPage.Tick (model.time - model.startTime) k) model.agemailModel
+                                , agdefinitionModel = Zhaok31.MathVisDefinition.update (Zhaok31.MathVisDefinition.Tick (model.time - model.startTime) k) model.agdefinitionModel
+                                , agvideoModel = Zhaok31.MathVisVideo.update (Zhaok31.MathVisVideo.Tick (model.time - model.startTime) k) model.agvideoModel
+                                , agq1Model = Zhaok31.MathVisQ1.update (Zhaok31.MathVisQ1.Tick (model.time - model.startTime) k) model.agq1Model
+                                , agq2Model = Zhaok31.MathVisQ2.update (Zhaok31.MathVisQ2.Tick (model.time - model.startTime) k) model.agq2Model
+                                , agq3Model = Zhaok31.MathVisQ3.update (Zhaok31.MathVisQ3.Tick (model.time - model.startTime) k) model.agq3Model
+                                , agq4Model = Zhaok31.MathVisQ4.update (Zhaok31.MathVisQ4.Tick (model.time - model.startTime) k) model.agq4Model
+                                , agq5Model = Zhaok31.MathVisQ5.update (Zhaok31.MathVisQ5.Tick (model.time - model.startTime) k) model.agq5Model
+                                , agq6Model = Zhaok31.MathVisQ6.update (Zhaok31.MathVisQ6.Tick (model.time - model.startTime) k) model.agq6Model
+                                , agq7Model = Zhaok31.MathVisQ7.update (Zhaok31.MathVisQ7.Tick (model.time - model.startTime) k) model.agq7Model
+                                , agq8Model = Zhaok31.MathVisQ8.update (Zhaok31.MathVisQ8.Tick (model.time - model.startTime) k) model.agq8Model
+                                , agq9Model = Zhaok31.MathVisQ9.update (Zhaok31.MathVisQ9.Tick (model.time - model.startTime) k) model.agq9Model
+                                , agq10Model = Zhaok31.MathVisQ10.update (Zhaok31.MathVisQ10.Tick (model.time - model.startTime) k) model.agq10Model
+                                 }
+                              
+                     -- setting up the models
+                     AGTITLEMsg agtitleMsg -> {model | agtitleModel = Zhaok31.MathVisTitlePage.update agtitleMsg model.agtitleModel}
+                     AGEMAILMsg agemailMsg -> {model | agemailModel = Zhaok31.MathVisEmailsPage.update agemailMsg model.agemailModel}
+                     AGDEFINITIONMsg agdefinitionMsg -> {model | agdefinitionModel = Zhaok31.MathVisDefinition.update agdefinitionMsg model.agdefinitionModel}
+                     AGVIDEOMsg agvideoMsg -> {model | agvideoModel = Zhaok31.MathVisVideo.update agvideoMsg model.agvideoModel}
+                     AGQ1Msg agq1Msg -> {model | agq1Model = Zhaok31.MathVisQ1.update agq1Msg model.agq1Model}
+                     AGQ2Msg agq2Msg -> {model | agq2Model = Zhaok31.MathVisQ2.update agq2Msg model.agq2Model}
+                     AGQ3Msg agq3Msg -> {model | agq3Model = Zhaok31.MathVisQ3.update agq3Msg model.agq3Model}
+                     AGQ4Msg agq4Msg -> {model | agq4Model = Zhaok31.MathVisQ4.update agq4Msg model.agq4Model}
+                     AGQ5Msg agq5Msg -> {model | agq5Model = Zhaok31.MathVisQ5.update agq5Msg model.agq5Model}
+                     AGQ6Msg agq6Msg -> {model | agq6Model = Zhaok31.MathVisQ6.update agq6Msg model.agq6Model}
+                     AGQ7Msg agq7Msg -> {model | agq7Model = Zhaok31.MathVisQ7.update agq7Msg model.agq7Model}
+                     AGQ8Msg agq8Msg -> {model | agq8Model = Zhaok31.MathVisQ8.update agq8Msg model.agq8Model}
+                     AGQ9Msg agq9Msg -> {model | agq9Model = Zhaok31.MathVisQ9.update agq9Msg model.agq9Model}
+                     AGQ10Msg agq10Msg -> {model | agq10Model = Zhaok31.MathVisQ10.update agq10Msg model.agq10Model}
+
+
+                     -- Button for email page
+                     EmailButton  ->
+                        case model.state of
+                            TitleScreen  -> { model | state = Email, startTime = model.time }
+                            
+                            otherwise -> model
+                            
+                     -- Button for email page
+                     BackButton  ->
+                        case model.state of
+                            Email  -> { model | state = TitleScreen, startTime = model.time }
+                            Definition -> { model | state = TitleScreen, startTime = model.time }
+                            Video -> { model | state = TitleScreen, startTime = model.time }
+                            Q1 -> { model | state = TitleScreen, startTime = model.time }
+                            Q2 -> { model | state = TitleScreen, startTime = model.time }
+                            Q3 -> { model | state = TitleScreen, startTime = model.time }
+                            Q4 -> { model | state = TitleScreen, startTime = model.time }
+                            Q5 -> { model | state = TitleScreen, startTime = model.time }
+                            Q6 -> { model | state = TitleScreen, startTime = model.time }
+                            Q7 -> { model | state = TitleScreen, startTime = model.time }
+                            Q8 -> { model | state = TitleScreen, startTime = model.time }
+                            Q9 -> { model | state = TitleScreen, startTime = model.time }
+                            Q10 -> { model | state = TitleScreen, startTime = model.time }
+                            
+                            otherwise -> model
+                            
+                     -- Button for Definition page
+                     DefinitionButton  ->
+                        case model.state of
+                            TitleScreen  -> { model | state = Definition, startTime = model.time }
+                            
+                            otherwise -> model
+                            
+                            
+                     -- Button for Video page
+                     VideoButton  ->
+                        case model.state of
+                            TitleScreen  -> { model | state = Video, startTime = model.time }
+                            
+                            otherwise -> model
+                        
+                     -- Button for Practice page
+                     PracticeButton  ->
+                        case model.state of
+                            TitleScreen  -> { model | state = Q1, startTime = model.time }
+                            
+                            otherwise -> model
+                            
+                     -- Button for next question
+                     NextButton  ->
+                        case model.state of
+                            Q1  -> { model | state = Q2, startTime = model.time }
+                            Q2  -> { model | state = Q3, startTime = model.time }
+                            Q3  -> { model | state = Q4, startTime = model.time }
+                            Q4  -> { model | state = Q5, startTime = model.time }
+                            Q5  -> { model | state = Q6, startTime = model.time }
+                            Q6  -> { model | state = Q7, startTime = model.time }
+                            Q7  -> { model | state = Q8, startTime = model.time }
+                            Q8  -> { model | state = Q9, startTime = model.time }
+                            Q9  -> { model | state = Q10, startTime = model.time }
+                            Q10  -> { model | state = Q1, startTime = model.time }
+                            
+                            
+                            otherwise -> model
+                            
+                            
+                      -- Button for previous question
+                     PrevButton  ->
+                        case model.state of
+                            Q2  -> { model | state = Q1, startTime = model.time }
+                            Q3  -> { model | state = Q2, startTime = model.time }
+                            Q4  -> { model | state = Q3, startTime = model.time }
+                            Q5  -> { model | state = Q4, startTime = model.time }
+                            Q6  -> { model | state = Q5, startTime = model.time }
+                            Q7  -> { model | state = Q6, startTime = model.time }
+                            Q8  -> { model | state = Q7, startTime = model.time }
+                            Q9  -> { model | state = Q8, startTime = model.time }
+                            Q10  -> { model | state = Q9, startTime = model.time }
+                            Q1  -> { model | state = Q10, startTime = model.time }
+                            
+                            
+                            otherwise -> model
+                        
+                        
+
+
+-- Initialize all variables 
+init = { time = 0
+       , startTime = 0
+       , state = TitleScreen
+       , agtitleModel = Zhaok31.MathVisTitlePage.init
+       , agemailModel = Zhaok31.MathVisEmailsPage.init
+       , agdefinitionModel = Zhaok31.MathVisDefinition.init
+       , agvideoModel = Zhaok31.MathVisVideo.init
+       , agq1Model = Zhaok31.MathVisQ1.init
+       , agq2Model = Zhaok31.MathVisQ2.init
+       , agq3Model = Zhaok31.MathVisQ3.init
+       , agq4Model = Zhaok31.MathVisQ4.init
+       , agq5Model = Zhaok31.MathVisQ5.init
+       , agq6Model = Zhaok31.MathVisQ6.init
+       , agq7Model = Zhaok31.MathVisQ7.init
+       , agq8Model = Zhaok31.MathVisQ8.init
+       , agq9Model = Zhaok31.MathVisQ9.init
+       , agq10Model = Zhaok31.MathVisQ10.init
+       }
+
+
+-- main variables 
+main = gameApp Tick { model = init, view = view, update = update, title = "Game Slot" }
+
+-- view tracker
+view model = collage 192 128 (myShapes model)
+
+
+
